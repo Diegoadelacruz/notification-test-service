@@ -1,13 +1,17 @@
 package com.diegodelacruz.notificationtestservice.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 
 @Data
@@ -31,10 +35,10 @@ public class User {
     @Column(nullable = false, length = 15)
     private String phoneNumber;
 
-    @Column(nullable = false)
-    private String subscribed;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Category> subscribed;
 
-    @Column(nullable = false)
-    private String channels;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Notification> channels;
 
 }

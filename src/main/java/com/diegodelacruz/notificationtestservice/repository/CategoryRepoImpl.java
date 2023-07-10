@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 public class CategoryRepoImpl implements ICategoryRepo {
 
     @Override
-    public Category getActualCategory(){
-        return new Category(1, "Sport", "Activity involving physical exertion and skill in which an individual or team competes against another or other for enterteiment.");
+    public Category getActualCategory() {
+        return null;
     }
 
 }
