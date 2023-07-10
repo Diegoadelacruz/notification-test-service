@@ -1,13 +1,14 @@
-package com.diegodelacruz.notificationtestservice.service;
+package com.diegodelacruz.notificationtestservice.service.impl;
 
 import com.diegodelacruz.notificationtestservice.model.Category;
 import com.diegodelacruz.notificationtestservice.repository.ICategoryRepo;
+import com.diegodelacruz.notificationtestservice.service.ICategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CategoryService implements ICategoryService {
+public class CategoryServiceImpl implements ICategoryService {
 
     private final ICategoryRepo repo;
 
