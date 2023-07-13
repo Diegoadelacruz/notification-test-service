@@ -22,8 +22,9 @@ import java.util.List;
 @Table(name = "user_data")
 public class User {
 
-    @EqualsAndHashCode.Include
+
     @Id
+    @EqualsAndHashCode.Include
     private Integer idUser;
 
     @Column(nullable = false, length = 50)
