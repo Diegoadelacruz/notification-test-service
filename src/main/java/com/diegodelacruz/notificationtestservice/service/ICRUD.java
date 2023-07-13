@@ -10,8 +10,8 @@ public interface ICRUD<T, ID>{
 
     List<T> readAll() throws Exception;
 
-    T readById(Integer id) throws Exception;
+    T readById(ID id) throws Exception;
 
-    void delete(Integer id) throws Exception;
+    void delete(ID id) throws Exception;
 
 }
