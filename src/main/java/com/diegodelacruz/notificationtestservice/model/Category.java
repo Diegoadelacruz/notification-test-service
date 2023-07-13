@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,7 @@ public class Category {
     private Integer idCategory;
 
     @ManyToOne
-    @JoinColumn(name = "id_user", nullable = false, foreignKey = @ForeignKey(name = "FK_Category_User"))
+    @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "FK_Category_User"))
     private User user;
 
     @Column(name = "name", nullable = false, length = 50)

@@ -23,7 +23,7 @@ public class Notification {
     private Integer idNotification;
 
     @ManyToOne
-    @JoinColumn(name = "id_user", nullable = false, foreignKey = @ForeignKey(name = "FK_Notification_User"))
+    @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "FK_Notification_User"))
     private User user;
 
     @Column(name = "name", nullable = false, length = 50)
