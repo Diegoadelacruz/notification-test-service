@@ -3,13 +3,9 @@ package com.diegodelacruz.notificationtestservice.controller;
 import com.diegodelacruz.notificationtestservice.model.Category;
 import com.diegodelacruz.notificationtestservice.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,27 +17,34 @@ public class CategoryController {
     private ICategoryService service;
 
     @GetMapping
-    public List<Category> readAll() throws Exception {
-        return service.readAll();
+    public ResponseEntity<List<Category>> readAll() throws Exception {
+        List<Category> list = service.readAll();
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Category readById(@PathVariable("id") Integer id) throws Exception {
-        return service.readById(id);
+    public ResponseEntity<Category> readById(@PathVariable("id") Integer id) throws Exception {
+        Category category = service.readById(id);
+        return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
     @PostMapping
-    public Category create(@RequestBody Category category) throws Exception {
-        return service.save(category);
+    public ResponseEntity<Category> create(@RequestBody Category category) throws Exception {
+        Category categorySaved = service.save(category);
+        return new ResponseEntity<>(categorySaved, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public Category update(@PathVariable("id") Integer id, @RequestBody Category category) throws Exception {
-        return service.update(category);
+    public ResponseEntity<Category> update(@PathVariable("id") Integer id, @RequestBody Category category) throws Exception {
+        category.setIdCategory(id);
+        Category categoryUpdated = service.save(category);
+        return new ResponseEntity<>(categoryUpdated, HttpStatus.OK);
     }
 
-    public void delete(@PathVariable("id") Integer id) throws Exception {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws Exception {
         service.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

@@ -3,12 +3,9 @@ package com.diegodelacruz.notificationtestservice.controller;
 import com.diegodelacruz.notificationtestservice.model.Notification;
 import com.diegodelacruz.notificationtestservice.service.INotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,18 +17,22 @@ public class NotificationController {
     private INotificationService service;
 
     @GetMapping
-    public List<Notification> readAll() throws Exception{
-        return service.readAll();
+    public ResponseEntity<List<Notification>> readAll() throws Exception {
+        List<Notification> list = service.readAll();
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @PostMapping
-    public Notification create(@RequestBody Notification notification) throws Exception{
-        return service.save(notification);
+    public ResponseEntity<Notification> create(@RequestBody Notification notification) throws Exception {
+        Notification notificationSaved = service.save(notification);
+        return new ResponseEntity<>(notificationSaved, HttpStatus.CREATED);
     }
 
-    @PutMapping
-    public Notification update(Notification notification) throws Exception{
-        return service.update(notification);
+    @PutMapping("/{id}")
+    public ResponseEntity<Notification> update(@PathVariable("id") Integer id, @RequestBody Notification notification) throws Exception {
+        notification.setIdNotification(id);
+        Notification notificationUpdated = service.update(notification);
+        return new ResponseEntity<>(notificationUpdated, HttpStatus.OK);
     }
 
 }
