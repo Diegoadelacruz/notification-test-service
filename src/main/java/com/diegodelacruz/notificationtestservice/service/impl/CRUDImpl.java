@@ -1,5 +1,6 @@
 package com.diegodelacruz.notificationtestservice.service.impl;
 
+import com.diegodelacruz.notificationtestservice.exception.ModelNotFoundException;
 import com.diegodelacruz.notificationtestservice.repository.IGenericRepo;
 import com.diegodelacruz.notificationtestservice.service.ICRUD;
 
@@ -15,7 +16,8 @@ public abstract class CRUDImpl<T, ID> implements ICRUD<T, ID> {
     }
 
     @Override
-    public T update(T t) throws Exception {
+    public T update(T t, ID id) throws Exception {
+        getRepo().findById(id).orElseThrow(() -> new ModelNotFoundException("ID NOT FOUND " + id));
         return getRepo().save(t);
     }
 
@@ -26,11 +28,12 @@ public abstract class CRUDImpl<T, ID> implements ICRUD<T, ID> {
 
     @Override
     public T readById(ID id) throws Exception {
-        return getRepo().findById(id).orElse(null);
+        return getRepo().findById(id).orElseThrow(() -> new ModelNotFoundException("ID NOT FOUND " + id));
     }
 
     @Override
     public void delete(ID id) throws Exception {
+        getRepo().findById(id).orElseThrow(() -> new ModelNotFoundException("ID NOT FOUND " + id));
         getRepo().deleteById(id);
     }
 }

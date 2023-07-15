@@ -31,7 +31,7 @@ public class NotificationController {
     @PutMapping("/{id}")
     public ResponseEntity<Notification> update(@PathVariable("id") Integer id, @RequestBody Notification notification) throws Exception {
         notification.setIdNotification(id);
-        Notification notificationUpdated = service.update(notification);
+        Notification notificationUpdated = service.save(notification);
         return new ResponseEntity<>(notificationUpdated, HttpStatus.OK);
     }
 
