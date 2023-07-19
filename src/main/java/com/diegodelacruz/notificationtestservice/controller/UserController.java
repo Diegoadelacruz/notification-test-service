@@ -1,8 +1,6 @@
 package com.diegodelacruz.notificationtestservice.controller;
 
-import com.diegodelacruz.notificationtestservice.dto.NotificationDTO;
 import com.diegodelacruz.notificationtestservice.dto.UserDTO;
-import com.diegodelacruz.notificationtestservice.model.Notification;
 import com.diegodelacruz.notificationtestservice.model.User;
 import com.diegodelacruz.notificationtestservice.service.IUserService;
 import org.modelmapper.ModelMapper;
@@ -22,7 +20,7 @@ public class UserController {
     @Autowired
     private IUserService service;
 
-    Qualifier("userMapper")
+    @Qualifier("userMapper")
     @Autowired
     private ModelMapper mapper;
 

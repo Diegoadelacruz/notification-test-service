@@ -5,6 +5,7 @@ import com.diegodelacruz.notificationtestservice.model.Category;
 import com.diegodelacruz.notificationtestservice.service.ICategoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ public class CategoryController {
     private ICategoryService service;
 
     @Autowired
+    @Qualifier("categoryMapper")
     private ModelMapper mapper;
 
     @GetMapping
