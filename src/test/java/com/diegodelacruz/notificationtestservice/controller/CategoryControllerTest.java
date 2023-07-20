@@ -5,8 +5,10 @@ import com.diegodelacruz.notificationtestservice.exception.ModelNotFoundExceptio
 import com.diegodelacruz.notificationtestservice.model.Category;
 import com.diegodelacruz.notificationtestservice.service.ICategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -41,16 +43,26 @@ public class CategoryControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    Category CATEGORY_1 = new Category(1, "Sport", "Sport description test");
+    private Category CATEGORY_1;
 
-    Category CATEGORY_2 = new Category(2, "Finance", "Finance description test");
+    private Category CATEGORY_2;
 
-    Category CATEGORY_3 = new Category(3, "Movies", "Movies description test");
+    private Category CATEGORY_3;
 
-    CategoryDTO CATEGORYDTO_1 = new CategoryDTO(1, "Sport", "Sport description test");
-    CategoryDTO CATEGORYDTO_2 = new CategoryDTO(2, "Finance", "Finance description test");
-    CategoryDTO CATEGORYDTO_3 = new CategoryDTO(3, "Movies", "Movies description test");
+    private CategoryDTO CATEGORYDTO_1;
+    private CategoryDTO CATEGORYDTO_2;
+    private CategoryDTO CATEGORYDTO_3;
 
+    @BeforeEach
+    public void init() {
+        MockitoAnnotations.openMocks(this);
+        CATEGORY_1 = new Category(1, "Sport", "Sport description test");
+        CATEGORY_2 = new Category(2, "Finance", "Finance description test");
+        CATEGORY_3 = new Category(3, "Movies", "Movies description test");
+        CATEGORYDTO_1 = new CategoryDTO(1, "Sport", "Sport description test");
+        CATEGORYDTO_2 = new CategoryDTO(2, "Finance", "Finance description test");
+        CATEGORYDTO_3 = new CategoryDTO(3, "Movies", "Movies description test");
+    }
 
     @Test
     public void readAllTest() throws Exception {
@@ -137,7 +149,7 @@ public class CategoryControllerTest {
     }
 
     @Test
-    public void deleteTest()throws Exception{
+    public void deleteTest() throws Exception {
         int ID_CATEGORY = 1;
 
         mockMvc.perform(MockMvcRequestBuilders
