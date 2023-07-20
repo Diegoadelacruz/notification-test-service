@@ -39,7 +39,7 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<User> update(@PathVariable("id") Integer id, @RequestBody UserDTO userDTO) throws Exception {
         userDTO.setId(id);
-        User userUpdated = service.save(convertToEntity(userDTO));
+        User userUpdated = service.update(convertToEntity(userDTO), id);
         return new ResponseEntity<>(userUpdated, HttpStatus.OK);
     }
 

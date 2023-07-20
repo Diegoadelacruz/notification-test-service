@@ -15,10 +15,6 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCategory;
 
-    @ManyToOne
-    @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "FK_Category_User"))
-    private User user;
-
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 

@@ -41,7 +41,7 @@ public class NotificationController {
     @PutMapping("/{id}")
     public ResponseEntity<NotificationDTO> update(@PathVariable("id") Integer id, @RequestBody NotificationDTO notificationDTO) throws Exception {
         notificationDTO.setId(id);
-        Notification notificationUpdated = service.save(convertToEntity(notificationDTO));
+        Notification notificationUpdated = service.update(convertToEntity(notificationDTO), id);
         return new ResponseEntity<>(convertToDto(notificationUpdated), HttpStatus.OK);
     }
 
