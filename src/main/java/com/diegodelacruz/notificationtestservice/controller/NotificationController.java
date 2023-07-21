@@ -1,8 +1,6 @@
 package com.diegodelacruz.notificationtestservice.controller;
 
-import com.diegodelacruz.notificationtestservice.dto.CategoryDTO;
 import com.diegodelacruz.notificationtestservice.dto.NotificationDTO;
-import com.diegodelacruz.notificationtestservice.model.Category;
 import com.diegodelacruz.notificationtestservice.model.Notification;
 import com.diegodelacruz.notificationtestservice.service.INotificationService;
 import org.modelmapper.ModelMapper;
@@ -32,6 +30,12 @@ public class NotificationController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<NotificationDTO> readById(@PathVariable("id") Integer id) throws Exception {
+        Notification notification = service.readById(id);
+        return new ResponseEntity<>(convertToDto(notification), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<NotificationDTO> create(@RequestBody NotificationDTO notificationDTO) throws Exception {
         Notification notificationSaved = service.save(convertToEntity(notificationDTO));
@@ -43,6 +47,12 @@ public class NotificationController {
         notificationDTO.setId(id);
         Notification notificationUpdated = service.update(convertToEntity(notificationDTO), id);
         return new ResponseEntity<>(convertToDto(notificationUpdated), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws Exception {
+        service.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     private NotificationDTO convertToDto(Notification notification) {

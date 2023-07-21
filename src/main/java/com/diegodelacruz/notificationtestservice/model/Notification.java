@@ -22,10 +22,6 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idNotification;
 
-    @ManyToOne
-    @JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "FK_Notification_User"))
-    private User user;
-
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 

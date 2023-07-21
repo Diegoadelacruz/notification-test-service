@@ -46,8 +46,7 @@ public class CategoryServiceTest {
     }
 
     @Test
-    public void reallTest() throws Exception {
-
+    public void readAllTest() throws Exception {
         List<Category> response = service.readAll();
         assertEquals(response.size(), 3);
     }
